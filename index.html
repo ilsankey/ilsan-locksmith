@@ -20,8 +20,8 @@ HTML
         [contenteditable="true"]:hover { background-color: rgba(239, 68, 68, 0.05); outline: 2px dashed #ef4444; }
         [contenteditable="true"]:focus { background-color: rgba(239, 68, 68, 0.1); outline: 2px solid #ef4444; }
         
-        /* 🔍 사진 확대 모달 애니메이션 */
-        #imageModal { transition: opacity 0.3s ease-in-out; }
+        /* 🔍 사진 확대 모달 애니메이션 및 터치 개선 */
+        #imageModal { transition: opacity 0.2s ease-in-out; }
         #imageModal.hidden { opacity: 0; pointer-events: none; display: none; }
         #imageModal.flex { display: flex; opacity: 1; }
     </style>
@@ -113,13 +113,14 @@ HTML
         </div>
     </section>
 
-    <!-- 🔍 5. 이미지 확대 보기 모달 팝업 창 (새로 추가된 컴포넌트) -->
-    <div id="imageModal" class="hidden fixed inset-0 bg-black/90 z-[2000] justify-center items-center p-4 cursor-zoom-out" onclick="closeModal()">
-        <button class="absolute top-6 right-6 text-white text-3xl opacity-70 hover:opacity-100 transition shrink-0 z-[2001]">
+    <!-- 🔍 5. 이미지 확대 보기 모달 팝업 창 (모바일 터치 줌 대응 업그레이드) -->
+    <div id="imageModal" class="hidden fixed inset-0 bg-black/95 z-[2000] justify-center items-center p-2 sm:p-4 cursor-zoom-out" onclick="closeModal()">
+        <button class="absolute top-6 right-6 text-white text-3xl opacity-75 hover:opacity-100 transition shrink-0 z-[2001] bg-black/40 w-10 h-10 rounded-full flex items-center justify-center">
             <i class="fa-solid fa-xmark"></i>
         </button>
-        <div class="max-w-4xl max-h-[85vh] flex justify-center items-center relative" onclick="event.stopPropagation()">
-            <img id="modalTargetImg" src="" alt="확대 이미지" class="max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain animate-fadeIn">
+        <!-- 터치 기기에서 확대가 용이하도록 최소 여백 확보 및 객체 크기 조정 -->
+        <div class="max-w-full max-h-[90vh] flex justify-center items-center relative" onclick="event.stopPropagation()">
+            <img id="modalTargetImg" src="" alt="확대 이미지" class="max-w-full max-h-[90vh] rounded shadow-2xl object-contain select-none transition-transform duration-200">
         </div>
     </div>
 
@@ -234,14 +235,15 @@ HTML
     </footer>
 
     <script>
+        // 🛠️ 임시 가짜 주소(door1.jpg) 대신 실제 작동하는 고화질 샘플 이미지로 변경했습니다.
         const defaultServices = [
-            { id: 0, title: "디지털도어락", desc: "국산 전 브랜드 최신 푸시풀 및 지문인식 번호키 당일 신속 완벽 설치. 문 잠김 파손 없이 안전 개문 서비스 제공", images: ["door1.jpg", "door2.jpg", "door3.jpg"] },
-            { id: 1, title: "아날로그도어락", desc: "안전 보조키, 특수 실린더키, 현관 레버락, 대문용 개폐기 설치 및 노후 잠금장치 고장 수리 일체", images: ["https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=500&q=80"] },
-            { id: 2, title: "자동차키", desc: "국산 및 수입 차량 차키 분실 시 현장으로 직행. 이모빌라이저 키복원부터 스마트키 코딩까지 즉석 제작", images: ["https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=500&q=80"] },
-            { id: 3, title: "열쇠복사", desc: "정밀 전용 복사 장비를 통한 수입 오토바이키, 특수키, 일반 열쇠 오차 없는 정밀 복사 시스템", images: ["https://images.unsplash.com/photo-1619120238346-978e07731e77?auto=format&fit=crop&w=500&q=80"] },
-            { id: 4, title: "도장", desc: "법인 인감도장, 개인 서명용 인감, 목도장, 결재 직인 등 용도별 고급 서체 맞춤형 즉석 조각 전담", images: ["https://images.unsplash.com/photo-1595113316349-9fa4ee24f884?auto=format&fit=crop&w=500&q=80"] },
-            { id: 5, title: "스탬프", desc: "편리한 만년인, 사업자 등록 스탬프, 자동 스탬프 등 별도의 패드가 필요 없는 고품질 스탬프 제작", images: ["https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=500&q=80"] },
-            { id: 6, title: "사주감명 인장제작", desc: "정통 명리학 사주 감명을 통해 선천적 기운을 완벽히 보강하고 발복을 유도하는 최고급 수제 사주 인장", images: ["https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&w=500&q=80"] }
+            { id: 0, title: "디지털도어락", desc: "국산 전 브랜드 최신 푸시풀 및 지문인식 번호키 당일 신속 완벽 설치. 문 잠김 파손 없이 안전 개문 서비스 제공", images: ["https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=600&q=80"] },
+            { id: 1, title: "아날로그도어락", desc: "안전 보조키, 특수 실린더키, 현관 레버락, 대문용 개폐기 설치 및 노후 잠금장치 고장 수리 일체", images: ["https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=600&q=80"] },
+            { id: 2, title: "자동차키", desc: "국산 및 수입 차량 차키 분실 시 현장으로 직행. 이모빌라이저 키복원부터 스마트키 코딩까지 즉석 제작", images: ["https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80"] },
+            { id: 3, title: "열쇠복사", desc: "정밀 전용 복사 장비를 통한 수입 오토바이키, 특수키, 일반 열쇠 오차 없는 정밀 복사 시스템", images: ["https://images.unsplash.com/photo-1619120238346-978e07731e77?auto=format&fit=crop&w=600&q=80"] },
+            { id: 4, title: "도장", desc: "법인 인감도장, 개인 서명용 인감, 목도장, 결재 직인 등 용도별 고급 서체 맞춤형 즉석 조각 전담", images: ["https://images.unsplash.com/photo-1595113316349-9fa4ee24f884?auto=format&fit=crop&w=600&q=80"] },
+            { id: 5, title: "스탬프", desc: "편리한 만년인, 사업자 등록 스탬프, 자동 스탬프 등 별도의 패드가 필요 없는 고품질 스탬프 제작", images: ["https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80"] },
+            { id: 6, title: "사주감명 인장제작", desc: "정통 명리학 사주 감명을 통해 선천적 기운을 완벽히 보강하고 발복을 유도하는 최고급 수제 사주 인장", images: ["https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&w=600&q=80"] }
         ];
 
         const defaultReviews = [
@@ -252,6 +254,7 @@ HTML
         let activeImageIndices = {};
 
         window.onload = function() {
+            // 항상 최신 이미지 데이터 세팅을 유도하도록 강제 초기화 로직 변경
             localStorage.setItem('ilsan_services', JSON.stringify(defaultServices));
             if(!localStorage.getItem('ilsan_reviews')) {
                 localStorage.setItem('ilsan_reviews', JSON.stringify(defaultReviews));
@@ -298,8 +301,8 @@ HTML
                 container.innerHTML += `
                     <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 flex flex-col justify-between">
                         <div>
-                            <!-- 🔍 이미지 클릭 시 openModal 함수가 동작되도록 셋팅, 커서 모양 변경 -->
                             <div class="relative w-full h-48 bg-gray-200 select-none cursor-zoom-in">
+                                <!-- 🔍 이미지 태그 클릭 시 모달 오픈 함수 실행 -->
                                 <img src="${currentImgUrl}" alt="${srv.title}" class="w-full h-48 object-cover" onclick="openModal('${currentImgUrl}')">
                                 ${srv.images.length > 1 ? `
                                     <button onclick="event.stopPropagation(); changeImg(${srv.id}, -1, ${srv.images.length})" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 text-white w-7 h-7 rounded-full text-xs font-bold hover:bg-black/90 z-20"><i class="fa-solid fa-chevron-left"></i></button>
@@ -322,15 +325,17 @@ HTML
             });
         }
 
-        /* 🔍 이미지 확대 제어 자바스크립트 함수 */
+        /* 🔍 이미지 확대 모달 제어 함수 */
         function openModal(imgSrc) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalTargetImg');
-            if(imgSrc) {
+            if(imgSrc && !imgSrc.includes('door1.jpg')) { // 깨진 기본명 방어코드 추가
                 modalImg.src = imgSrc;
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
-                document.body.style.overflow = 'hidden'; // 뒷배경 스크롤 방지
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                alert("현재 샘플 이미지가 등록되지 않았거나 올바르지 않은 주소입니다. 하단의 '사진 주소 편집'을 통해 올바른 이미지 링크를 넣어주세요!");
             }
         }
 
@@ -338,7 +343,7 @@ HTML
             const modal = document.getElementById('imageModal');
             modal.classList.remove('flex');
             modal.classList.add('hidden');
-            document.body.style.overflow = ''; // 스크롤 원복
+            document.body.style.overflow = ''; 
         }
 
         function changeImg(id, step, total) {
@@ -349,12 +354,12 @@ HTML
         function editImagesUrls(id) {
             const services = JSON.parse(localStorage.getItem('ilsan_services'));
             const item = services.find(s => s.id === id);
-            const userPrompt = prompt("💡 이 서비스에 표시할 이미지 파일명을 입력해 주세요.\n여러 장을 등록하시려면 줄바꿈을 눌러 한 줄에 하나씩 적어주시면 됩니다:", item.images.join("\n"));
+            const userPrompt = prompt("💡 이 서비스에 표시할 실제 이미지 인터넷 주소(URL)를 입력해 주세요.\n여러 장을 등록하시려면 줄바꿈을 눌러 한 줄에 하나씩 적어주시면 됩니다:", item.images.join("\n"));
             
             if(userPrompt !== null) {
                 const parsedImages = userPrompt.split("\n").map(line => line.trim()).filter(line => line.length > 0);
                 if(parsedImages.length === 0) {
-                    alert("최소 1개 이상의 올바른 이미지 파일명을 입력해야 합니다.");
+                    alert("최소 1개 이상의 올바른 이미지 주소를 입력해야 합니다.");
                     return;
                 }
                 item.images = parsedImages;
