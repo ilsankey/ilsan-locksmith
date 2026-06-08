@@ -213,7 +213,6 @@ HTML
     </footer>
 
     <script>
-        // 사장님이 주신 사진 주소를 기본 서비스 배열 첫 번째 이미지로 강제 지정했습니다!
         const defaultServices = [
             { id: 0, title: "디지털도어락", desc: "국산 전 브랜드 최신 푸시풀 및 지문인식 번호키 당일 신속 완벽 설치. 문 잠김 파손 없이 안전 개문 서비스 제공", images: ["https://postfiles.pstatic.net/MjAyNjA2MDhfMjIg/MDAxNzgwOTA3OTUwNDM4.lKAhfvP5vaL9hoU1n7UhRK2lEQa0LDNEiWO4QG143U0g.FHrgMAmM1asTBLB_ivkwB8QTf4JB0o-cAlv4MaoQsOUg.JPEG/BandPhoto_2022_01_02_19_35_56.jpg?type=w580"] },
             { id: 1, title: "아날로그도어락", desc: "안전 보조키, 특수 실린더키, 현관 레버락, 대문용 개폐기 설치 및 노후 잠금장치 고장 수리 일체", images: ["images/analog1.jpg"] },
@@ -234,8 +233,10 @@ HTML
         let currentModalImgIndex = 0;
 
         window.onload = function() {
-            // 새로고침 시 무조건 사장님 사진이 1순위로 리셋되도록 로컬스토리지를 한 번 정리 후 재탑재합니다.
-            localStorage.setItem('ilsan_services', JSON.stringify(defaultServices));
+            // [수정 핵심] 이미 저장된 데이터가 없는 '최초 방문'일 때만 기본 데이터(defaultServices)를 세팅합니다.
+            if(!localStorage.getItem('ilsan_services')) {
+                localStorage.setItem('ilsan_services', JSON.stringify(defaultServices));
+            }
             
             if(!localStorage.getItem('ilsan_reviews')) {
                 localStorage.setItem('ilsan_reviews', JSON.stringify(defaultReviews));
