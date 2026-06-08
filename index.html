@@ -19,6 +19,11 @@ HTML
         body { padding-top: 110px; font-family: 'Noto Sans KR', sans-serif; }
         [contenteditable="true"]:hover { background-color: rgba(239, 68, 68, 0.05); outline: 2px dashed #ef4444; }
         [contenteditable="true"]:focus { background-color: rgba(239, 68, 68, 0.1); outline: 2px solid #ef4444; }
+        
+        /* 🔍 사진 확대 모달 애니메이션 */
+        #imageModal { transition: opacity 0.3s ease-in-out; }
+        #imageModal.hidden { opacity: 0; pointer-events: none; display: none; }
+        #imageModal.flex { display: flex; opacity: 1; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -100,15 +105,25 @@ HTML
     <section id="services" class="py-20 container mx-auto px-4">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold border-b-4 border-red-600 inline-block pb-2">제공 서비스 안내</h2>
-            <p class="text-gray-600 mt-4 text-sm">아래의 글자를 클릭하여 직접 수정할 수 있으며, 여러 장의 이미지를 등록해 슬라이더로 넘겨볼 수 있습니다.</p>
+            <p class="text-gray-600 mt-4 text-sm">아래의 이미지를 클릭하시면 큰 화면으로 확대하여 확인하실 수 있습니다.</p>
         </div>
         
         <div id="servicesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- 동적 서비스 카드 렌더링 영역 -->
+            <!-- 서비스 카드 렌더링 영역 -->
         </div>
     </section>
 
-    <!-- 5. 신뢰 포인트 -->
+    <!-- 🔍 5. 이미지 확대 보기 모달 팝업 창 (새로 추가된 컴포넌트) -->
+    <div id="imageModal" class="hidden fixed inset-0 bg-black/90 z-[2000] justify-center items-center p-4 cursor-zoom-out" onclick="closeModal()">
+        <button class="absolute top-6 right-6 text-white text-3xl opacity-70 hover:opacity-100 transition shrink-0 z-[2001]">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-4xl max-h-[85vh] flex justify-center items-center relative" onclick="event.stopPropagation()">
+            <img id="modalTargetImg" src="" alt="확대 이미지" class="max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain animate-fadeIn">
+        </div>
+    </div>
+
+    <!-- 6. 신뢰 포인트 -->
     <section id="trust" class="bg-slate-100 py-20">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
@@ -140,7 +155,7 @@ HTML
         </div>
     </section>
 
-    <!-- 6. 고객후기란 -->
+    <!-- 7. 고객후기란 -->
     <section id="reviews" class="py-20 container mx-auto px-4 max-w-4xl">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold text-gray-900">소중한 고객 후기</h2>
@@ -169,7 +184,7 @@ HTML
         <div id="reviewList" class="space-y-4"></div>
     </section>
 
-    <!-- 7. 연락처 / 오시는 길 -->
+    <!-- 8. 연락처 / 오시는 길 -->
     <section id="contact" class="py-20 bg-slate-900 text-white">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="text-center mb-12">
@@ -219,7 +234,6 @@ HTML
     </footer>
 
     <script>
-        // 🔒 중요: 긴 인터넷 주소(URL) 대신 사장님이 업로드한 파일 이름을 다이렉트로 매핑했습니다.
         const defaultServices = [
             { id: 0, title: "디지털도어락", desc: "국산 전 브랜드 최신 푸시풀 및 지문인식 번호키 당일 신속 완벽 설치. 문 잠김 파손 없이 안전 개문 서비스 제공", images: ["door1.jpg", "door2.jpg", "door3.jpg"] },
             { id: 1, title: "아날로그도어락", desc: "안전 보조키, 특수 실린더키, 현관 레버락, 대문용 개폐기 설치 및 노후 잠금장치 고장 수리 일체", images: ["https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=500&q=80"] },
@@ -238,9 +252,7 @@ HTML
         let activeImageIndices = {};
 
         window.onload = function() {
-            // 새로 세팅된 로컬 파일 구조를 적용하기 위해 일시적으로 갱신합니다.
             localStorage.setItem('ilsan_services', JSON.stringify(defaultServices));
-            
             if(!localStorage.getItem('ilsan_reviews')) {
                 localStorage.setItem('ilsan_reviews', JSON.stringify(defaultReviews));
             }
@@ -252,19 +264,9 @@ HTML
         function loadNaverMapEngine() {
             const lat = 37.658632;
             const lng = 126.794621;
-            
-            const mapOptions = {
-                center: new naver.maps.LatLng(lat, lng),
-                zoom: 16,
-                zoomControl: true
-            };
-            
+            const mapOptions = { center: new naver.maps.LatLng(lat, lng), zoom: 16, zoomControl: true };
             const map = new naver.maps.Map('naverMap', mapOptions);
-            const marker = new naver.maps.Marker({
-                position: new naver.maps.LatLng(lat, lng),
-                map: map
-            });
-
+            const marker = new naver.maps.Marker({ position: new naver.maps.LatLng(lat, lng), map: map });
             const placeUrl = "https://map.naver.com/p/entry/place/1210319057";
             const infowindow = new naver.maps.InfoWindow({
                 content: `
@@ -277,11 +279,8 @@ HTML
                     </div>
                 `
             });
-            
             infowindow.open(map, marker);
-            naver.maps.Event.addListener(marker, "click", function() {
-                window.open(placeUrl, "_blank");
-            });
+            naver.maps.Event.addListener(marker, "click", function() { window.open(placeUrl, "_blank"); });
         }
 
         function renderServices() {
@@ -299,12 +298,13 @@ HTML
                 container.innerHTML += `
                     <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 flex flex-col justify-between">
                         <div>
-                            <div class="relative w-full h-48 bg-gray-200 select-none">
-                                <img src="${currentImgUrl}" alt="${srv.title}" class="w-full h-48 object-cover">
+                            <!-- 🔍 이미지 클릭 시 openModal 함수가 동작되도록 셋팅, 커서 모양 변경 -->
+                            <div class="relative w-full h-48 bg-gray-200 select-none cursor-zoom-in">
+                                <img src="${currentImgUrl}" alt="${srv.title}" class="w-full h-48 object-cover" onclick="openModal('${currentImgUrl}')">
                                 ${srv.images.length > 1 ? `
-                                    <button onclick="changeImg(${srv.id}, -1, ${srv.images.length})" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 text-white w-7 h-7 rounded-full text-xs font-bold hover:bg-black/90"><i class="fa-solid fa-chevron-left"></i></button>
-                                    <button onclick="changeImg(${srv.id}, 1, ${srv.images.length})" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 text-white w-7 h-7 rounded-full text-xs font-bold hover:bg-black/90"><i class="fa-solid fa-chevron-right"></i></button>
-                                    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/70 text-white px-2 py-0.5 rounded text-[10px] font-mono">${currentIdx + 1} / ${srv.images.length}</div>
+                                    <button onclick="event.stopPropagation(); changeImg(${srv.id}, -1, ${srv.images.length})" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 text-white w-7 h-7 rounded-full text-xs font-bold hover:bg-black/90 z-20"><i class="fa-solid fa-chevron-left"></i></button>
+                                    <button onclick="event.stopPropagation(); changeImg(${srv.id}, 1, ${srv.images.length})" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 text-white w-7 h-7 rounded-full text-xs font-bold hover:bg-black/90 z-20"><i class="fa-solid fa-chevron-right"></i></button>
+                                    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/70 text-white px-2 py-0.5 rounded text-[10px] font-mono z-20">${currentIdx + 1} / ${srv.images.length}</div>
                                 ` : ''}
                             </div>
                             <div class="p-5">
@@ -320,6 +320,25 @@ HTML
                     </div>
                 `;
             });
+        }
+
+        /* 🔍 이미지 확대 제어 자바스크립트 함수 */
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalTargetImg');
+            if(imgSrc) {
+                modalImg.src = imgSrc;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden'; // 뒷배경 스크롤 방지
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; // 스크롤 원복
         }
 
         function changeImg(id, step, total) {
