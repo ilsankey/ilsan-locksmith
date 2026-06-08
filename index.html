@@ -5,9 +5,7 @@ HTML
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>일산열쇠도장 - 고양시 전지역 즉시출동</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -22,13 +20,11 @@ HTML
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- 🔧 상단 관리자 안내 바 -->
     <div class="admin-header-bar bg-slate-800 text-white text-xs text-center px-4 flex justify-between items-center shadow-lg">
         <span class="truncate">🛠️ <strong>사장님 전용 관리모드:</strong> 글자 수정 및 이미지 주소 변경 후 우측 버튼을 꼭 눌러주세요.</span>
         <button onclick="saveAllData()" class="bg-red-600 hover:bg-red-700 text-white font-bold px-3 py-1 rounded text-[11px] transition shrink-0 ml-2 shadow">변경사항 저장하기</button>
     </div>
 
-    <!-- 1. 헤더 -->
     <header class="fixed-header bg-white shadow-md">
         <div class="container mx-auto px-4 h-full flex justify-between items-center">
             <a href="#" class="text-base font-bold text-red-600 flex items-center gap-2">
@@ -46,17 +42,17 @@ HTML
         </div>
     </header>
 
-    <!-- 2. 히어로 섹션 -->
-    <section class="bg-slate-900 text-white py-20 text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1510519138101-570d1dca3d66?auto=format&fit=crop&w=1200&q=80');"></div>
+    <section class="bg-slate-900 text-white py-24 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center opacity-40 select-none pointer-events-none" style="background-image: url('https://postfiles.pstatic.net/MjAyNjA2MDhfMjIg/MDAxNzgwOTA3OTUwNDM4.lKAhfvP5vaL9hoU1n7UhRK2lEQa0LDNEiWO4QG143U0g.FHrgMAmM1asTBLB_ivkwB8QTf4JB0o-cAlv4MaoQsOUg.JPEG/BandPhoto_2022_01_02_19_35_56.jpg?type=w580');"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-900/50 to-slate-950/80"></div>
         <div class="container mx-auto px-4 relative z-10">
             <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full tracking-wider">신속 정확 안전 보장</span>
             <h1 class="text-4xl md:text-6xl font-black mt-6 mb-4 text-white tracking-tight drop-shadow-lg">일산열쇠도장</h1>
-            <p class="text-lg md:text-2xl font-bold text-gray-200 mb-8 leading-tight max-w-2xl mx-auto">
+            <p class="text-lg md:text-2xl font-bold text-gray-100 mb-8 leading-tight max-w-2xl mx-auto drop-shadow">
                 고양시 전 지역 <span class="text-yellow-400">즉시 출동!</span><br>
                 <span class="text-base md:text-lg font-medium text-gray-300">24시 열쇠 · 도장 · 인장 해결사</span>
             </p>
-            <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl max-w-xl mx-auto inline-block border border-white/20 shadow-2xl">
+            <div class="bg-slate-950/70 backdrop-blur-md p-6 rounded-2xl max-w-xl mx-auto inline-block border border-white/10 shadow-2xl">
                 <p class="text-sm text-gray-300 mb-1">상담 및 즉시출동 직통번호</p>
                 <div class="text-2xl md:text-4xl font-black text-yellow-300 tracking-wide mb-2">
                     <a href="tel:031-902-1113" class="hover:underline">☎ 031-902-1113</a>
@@ -68,7 +64,6 @@ HTML
         </div>
     </section>
 
-    <!-- 3. 실적 바 -->
     <section class="bg-red-600 text-white py-6 shadow-inner">
         <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div><p class="text-3xl font-black text-yellow-300">30년</p><p class="text-xs text-red-100 mt-1">현장 노하우 업력</p></div>
@@ -78,7 +73,6 @@ HTML
         </div>
     </section>
 
-    <!-- 4. 서비스 소개 -->
     <section id="services" class="py-20 container mx-auto px-4">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold border-b-4 border-red-600 inline-block pb-2">제공 서비스 안내</h2>
@@ -87,7 +81,6 @@ HTML
         <div id="servicesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </section>
 
-    <!-- 5. 확대 모달 -->
     <div id="imageModal" class="hidden fixed inset-0 bg-black/95 z-[2000] justify-center items-center p-4 cursor-zoom-out modal-fade" onclick="closeModal()">
         <button class="absolute top-6 right-6 text-white text-xl font-bold bg-gray-800 hover:bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center border border-gray-600 shadow-xl z-[2003]" style="font-family: sans-serif;">X</button>
         <button onclick="event.stopPropagation(); navigateModalImg(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full text-xl font-black shadow-2xl z-[2002] flex items-center justify-center transition border-2 border-white cursor-pointer">◀</button>
@@ -98,7 +91,6 @@ HTML
         </div>
     </div>
 
-    <!-- 5-2. 이미지 주소 전용 편집 창 -->
     <div id="urlEditModal" class="hidden fixed inset-0 bg-black/60 z-[2000] justify-center items-center p-4 modal-fade">
         <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 relative">
             <h3 class="text-lg font-bold text-gray-950 mb-2 flex items-center gap-2"><i class="fa-regular fa-images text-red-600"></i> 이미지 주소 편집란</h3>
@@ -112,7 +104,6 @@ HTML
         </div>
     </div>
 
-    <!-- 6. 신뢰 포인트 -->
     <section id="trust" class="bg-slate-100 py-20">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900">왜 일산열쇠도장일까요?</h2></div>
@@ -141,7 +132,6 @@ HTML
         </div>
     </section>
 
-    <!-- 7. 고객후기란 -->
     <section id="reviews" class="py-20 container mx-auto px-4 max-w-4xl">
         <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900">소중한 고객 후기</h2></div>
         <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 mb-8">
@@ -164,7 +154,6 @@ HTML
         <div id="reviewList" class="space-y-4"></div>
     </section>
 
-    <!-- 🗺️ 8. 오시는 길 (IP 오류가 물리적으로 불가능한 고신뢰도 디자인 커스텀 카드) -->
     <section id="contact" class="py-20 bg-slate-900 text-white">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="text-center mb-12"><h2 class="text-3xl font-bold">연락처 및 오시는 길</h2></div>
@@ -193,9 +182,13 @@ HTML
                             <p class="text-red-400 text-xs font-bold mt-0.5">고양 전지역 현장 출동: 24시 연중무휴</p>
                         </div>
                     </div>
+                    <div class="pt-2">
+                        <a href="https://map.naver.com/p/entry/place/1210319057" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3.5 rounded-xl text-sm transition shadow-lg">
+                            <i class="fa-solid fa-map-location-dot"></i> 네이버 지도로 길찾기 · 위치보기
+                        </a>
+                    </div>
                 </div>
                 
-                <!-- 🛠️ 외부 데이터 연동 없이 자체 렌더링되어 오류가 절대 없는 지도 랜딩 카드 -->
                 <div class="w-full h-80 rounded-xl overflow-hidden shadow-2xl bg-slate-800 border border-slate-700 relative flex flex-col justify-center items-center p-6 text-center">
                     <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-950 opacity-50"></div>
                     <div class="relative z-10 flex flex-col items-center">
@@ -220,8 +213,9 @@ HTML
     </footer>
 
     <script>
+        // 사장님이 주신 사진 주소를 기본 서비스 배열 첫 번째 이미지로 강제 지정했습니다!
         const defaultServices = [
-            { id: 0, title: "디지털도어락", desc: "국산 전 브랜드 최신 푸시풀 및 지문인식 번호키 당일 신속 완벽 설치. 문 잠김 파손 없이 안전 개문 서비스 제공", images: ["images/door1.jpg", "images/door2.jpg", "images/door3.jpg"] },
+            { id: 0, title: "디지털도어락", desc: "국산 전 브랜드 최신 푸시풀 및 지문인식 번호키 당일 신속 완벽 설치. 문 잠김 파손 없이 안전 개문 서비스 제공", images: ["https://postfiles.pstatic.net/MjAyNjA2MDhfMjIg/MDAxNzgwOTA3OTUwNDM4.lKAhfvP5vaL9hoU1n7UhRK2lEQa0LDNEiWO4QG143U0g.FHrgMAmM1asTBLB_ivkwB8QTf4JB0o-cAlv4MaoQsOUg.JPEG/BandPhoto_2022_01_02_19_35_56.jpg?type=w580"] },
             { id: 1, title: "아날로그도어락", desc: "안전 보조키, 특수 실린더키, 현관 레버락, 대문용 개폐기 설치 및 노후 잠금장치 고장 수리 일체", images: ["images/analog1.jpg"] },
             { id: 2, title: "자동차키", desc: "국산 및 수입 차량 차키 분실 시 현장으로 직행. 이모빌라이저 키복원부터 스마트키 코딩까지 즉석 제작", images: ["images/carkey1.jpg"] },
             { id: 3, title: "열쇠복사", desc: "정밀 전용 복사 장비를 통한 수입 오토바이키, 특수키, 일반 열쇠 오차 없는 정밀 복사 시스템", images: ["images/copy1.jpg"] },
@@ -240,9 +234,9 @@ HTML
         let currentModalImgIndex = 0;
 
         window.onload = function() {
-            if(!localStorage.getItem('ilsan_services')) {
-                localStorage.setItem('ilsan_services', JSON.stringify(defaultServices));
-            }
+            // 새로고침 시 무조건 사장님 사진이 1순위로 리셋되도록 로컬스토리지를 한 번 정리 후 재탑재합니다.
+            localStorage.setItem('ilsan_services', JSON.stringify(defaultServices));
+            
             if(!localStorage.getItem('ilsan_reviews')) {
                 localStorage.setItem('ilsan_reviews', JSON.stringify(defaultReviews));
             }
