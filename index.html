@@ -17,9 +17,9 @@ HTML
         html { scroll-behavior: smooth; }
         /* 📌 관리자 바와 헤더가 절대 겹치지 않도록 높이 구조화 */
         .admin-header-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 1001; height: 44px; }
-        .fixed-header { position: fixed; top: 44px; left: 0; right: 0; z-index: 1000; }
+        .fixed-header { position: fixed; top: 44px; left: 0; right: 0; z-index: 1000; height: 60px; }
         /* 📌 상단 가려짐 방지를 위한 바디 패딩 최적화 */
-        body { padding-top: 125px; font-family: 'Noto Sans KR', sans-serif; }
+        body { padding-top: 110px; font-family: 'Noto Sans KR', sans-serif; }
         
         [contenteditable="true"]:hover { background-color: rgba(239, 68, 68, 0.05); outline: 2px dashed #ef4444; }
         [contenteditable="true"]:focus { background-color: rgba(239, 68, 68, 0.1); outline: 2px solid #ef4444; }
@@ -38,7 +38,7 @@ HTML
 
     <!-- 1. 헤더 -->
     <header class="fixed-header bg-white shadow-md">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="container mx-auto px-4 h-full flex justify-between items-center">
             <a href="#" class="text-base font-bold text-red-600 flex items-center gap-2">
                 <i class="fa-solid fa-key text-sm"></i> 일산열쇠도장
             </a>
@@ -105,15 +105,15 @@ HTML
         </div>
     </div>
 
-    <!-- 📝 5-2. [신규 추가] 여러 줄 입력 가능한 이미지 주소 전용 편집 창 -->
+    <!-- 📝 5-2. 여러 줄 입력 가능한 이미지 주소 전용 편집 창 (개선 버전) -->
     <div id="urlEditModal" class="hidden fixed inset-0 bg-black/60 z-[2000] justify-center items-center p-4 modal-fade">
-        <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 relative animate-in fade-in zoom-in-95 duration-150">
+        <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 relative">
             <h3 class="text-lg font-bold text-gray-950 mb-2 flex items-center gap-2">
                 <i class="fa-regular fa-images text-red-600"></i> 이미지 주소 편집란
             </h3>
             <p class="text-xs text-gray-500 mb-4 leading-relaxed">
-                💡 인터넷에서 복사한 사진 주소(URL)들을 한 줄에 하나씩 넣어주세요.<br>
-                <strong>엔터(줄바꿈)를 쳐서 아래 줄에 주소를 추가하면 사진이 여러 장으로 늘어납니다.</strong>
+                💡 인터넷에서 복사한 사진 주소들을 입력해 주세요.<br>
+                <strong>엔터(줄바꿈)를 치거나 쉼표(,)를 찍어서 주소들을 구분해 적으시면 사진이 추가됩니다.</strong>
             </p>
             <input type="hidden" id="editingServiceId">
             <textarea id="urlTextArea" rows="8" class="w-full p-3 border border-gray-300 rounded-lg text-xs font-mono bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500 mb-4 placeholder-gray-400" placeholder="예시)&#10;images/door1.jpg&#10;https://blogfiles.naver.net/..."></textarea>
@@ -317,7 +317,6 @@ HTML
             document.body.style.overflow = ''; 
         }
 
-        /* 📝 신규 추가된 여러 줄 편집창 제어 로직 */
         function openUrlModal(id) {
             const services = JSON.parse(localStorage.getItem('ilsan_services'));
             const item = services.find(s => s.id === id);
@@ -338,6 +337,7 @@ HTML
             document.body.style.overflow = '';
         }
 
+        /* ⭐ 쇠뿔도 단김에! 어떤 방식의 줄바꿈/구분자든 다 쪼개버리는 똑똑한 변환 엔진 */
         function saveUrlModalData() {
             const id = parseInt(document.getElementById('editingServiceId').value);
             const textValue = document.getElementById('urlTextArea').value;
@@ -345,8 +345,10 @@ HTML
             const services = JSON.parse(localStorage.getItem('ilsan_services'));
             const item = services.find(s => s.id === id);
             
-            // 엔터(줄바꿈) 기준으로 주소들을 쪼개서 배열로 깔끔하게 저장
-            item.images = textValue.split("\n").map(line => line.trim()).filter(line => line.length > 0);
+            // 📌 [핵심 개선] 윈도우 엔터(\r\n), 맥 엔터(\n), 콤마(,) 등 모든 구분자를 통합 처리합니다.
+            let rawLines = textValue.replace(/\r\n/g, "\n").split(/[\n,]+/);
+            
+            item.images = rawLines.map(line => line.trim()).filter(line => line.length > 0);
             activeImageIndices[id] = 0; 
             
             localStorage.setItem('ilsan_services', JSON.stringify(services));
