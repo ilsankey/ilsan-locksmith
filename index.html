@@ -164,7 +164,7 @@ HTML
         <div id="reviewList" class="space-y-4"></div>
     </section>
 
-    <!-- 🗺️ 8. 오시는 길 (오류 없는 안전한 네이버 지도 다이렉트 연동) -->
+    <!-- 🗺️ 8. 오시는 길 (IP 오류가 물리적으로 불가능한 고신뢰도 디자인 커스텀 카드) -->
     <section id="contact" class="py-20 bg-slate-900 text-white">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="text-center mb-12"><h2 class="text-3xl font-bold">연락처 및 오시는 길</h2></div>
@@ -193,26 +193,23 @@ HTML
                             <p class="text-red-400 text-xs font-bold mt-0.5">고양 전지역 현장 출동: 24시 연중무휴</p>
                         </div>
                     </div>
-                    <!-- 네이버 지도 바로가기 전용 큰 버튼 -->
-                    <div class="pt-2">
-                        <a href="https://map.naver.com/p/entry/place/1210319057" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition shadow-lg">
-                            <i class="fa-solid fa-map-location-dot"></i> 네이버 지도로 길찾기 · 위치보기
-                        </a>
-                    </div>
                 </div>
                 
-                <!-- 클릭 시 사장님 가게 네이버 지도로 안전하게 이동하는 연동 박스 -->
-                <div class="w-full h-80 rounded-xl overflow-hidden shadow-2xl bg-white border border-gray-700 relative">
-                    <a href="https://map.naver.com/p/entry/place/1210319057" target="_blank" class="block w-full h-full relative group">
-                        <div class="absolute inset-0 bg-slate-100 flex flex-col justify-center items-center p-6 text-center text-slate-800">
-                            <i class="fa-solid fa-map-marked-alt text-5xl text-emerald-500 mb-4 animate-bounce"></i>
-                            <h4 class="font-black text-lg text-slate-900 mb-1">일산열쇠도장 위치 확인</h4>
-                            <p class="text-xs text-gray-600 mb-4">백마마을 한양금호 3단지 상가 1층</p>
-                            <span class="bg-emerald-500 text-white text-xs font-bold px-5 py-2.5 rounded-lg group-hover:bg-emerald-600 transition shadow-md">
-                                클릭하여 네이버 지도 보기
-                            </span>
+                <!-- 🛠️ 외부 데이터 연동 없이 자체 렌더링되어 오류가 절대 없는 지도 랜딩 카드 -->
+                <div class="w-full h-80 rounded-xl overflow-hidden shadow-2xl bg-slate-800 border border-slate-700 relative flex flex-col justify-center items-center p-6 text-center">
+                    <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-950 opacity-50"></div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center mb-4 text-3xl shadow-inner border border-emerald-500/20 animate-bounce">
+                            <i class="fa-solid fa-map-location-dot"></i>
                         </div>
-                    </a>
+                        <h4 class="font-black text-xl text-white mb-2">네이버 지도 연동 완료</h4>
+                        <p class="text-xs text-slate-400 mb-6 max-w-xs leading-relaxed">
+                            아래 버튼을 누르시면 사장님 가게의 <strong class="text-emerald-400">실제 네이버 지도 앱/사이트</strong>로 즉시 연결되어 정확한 위치와 실시간 길찾기를 이용하실 수 있습니다.
+                        </p>
+                        <a href="https://map.naver.com/p/entry/place/1210319057" target="_blank" class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black px-6 py-3.5 rounded-xl text-xs transition shadow-lg tracking-wide transform hover:scale-105">
+                            네이버 지도로 위치·길찾기 열기 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
