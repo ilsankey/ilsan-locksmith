@@ -51,15 +51,23 @@ HTML
         </div>
     </header>
 
-    <!-- 2. 히어로 섹션 (고양시 전지역 즉시출동 강조) -->
+    <!-- 2. 히어로 섹션 (상호명 최대 강조 크기 조절 완료) -->
     <section class="bg-slate-900 text-white py-20 text-center relative overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1510519138101-570d1dca3d66?auto=format&fit=crop&w=1200&q=80');"></div>
         <div class="container mx-auto px-4 relative z-10">
             <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full tracking-wider">신속 정확 안전 보장</span>
-            <h1 class="text-3xl md:text-5xl font-extrabold mt-4 mb-6 leading-tight">
-                고양시 전 지역 <span class="text-yellow-400">즉시 출동!</span><br>
-                24시 열쇠·도장·인장 해결사
+            
+            <!-- 👑 상호명 '일산열쇠도장'을 가장 크고 웅장하게 배치 -->
+            <h1 class="text-4xl md:text-6xl font-black mt-6 mb-4 text-white tracking-tight drop-shadow-lg">
+                일산열쇠도장
             </h1>
+            
+            <!-- ⚡ 출동 관련 안내 텍스트는 서브 타이틀로 한 단계 작고 깔끔하게 배치 -->
+            <p class="text-lg md:text-2xl font-bold text-gray-200 mb-8 leading-tight max-w-2xl mx-auto">
+                고양시 전 지역 <span class="text-yellow-400">즉시 출동!</span><br>
+                <span class="text-base md:text-lg font-medium text-gray-300">24시 열쇠 · 도장 · 인장 해결사</span>
+            </p>
+
             <!-- 대표 전화번호 안내 박스 -->
             <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl max-w-xl mx-auto inline-block border border-white/20 shadow-2xl">
                 <p class="text-sm text-gray-300 mb-1">상담 및 즉시출동 직통번호</p>
@@ -171,12 +179,12 @@ HTML
         <div id="reviewList" class="space-y-4"></div>
     </section>
 
-    <!-- 7. 연락처 / 오시는 길 (정식 네이버 고유 Place 정보 100% 매핑 동기화 완료) -->
+    <!-- 7. 연락처 / 오시는 길 -->
     <section id="contact" class="py-20 bg-slate-900 text-white">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold">연락처 및 오시는 길</h2>
-                <p class="text-gray-400 mt-2 text-sm">제공해주신 실제 네이버 등록 플레이스 고유 정보와 완벽히 일치하는 연동 영역입니다.</p>
+                <p class="text-gray-400 mt-2 text-sm">네이버 등록 플레이스 고유 정보와 완벽히 일치하는 연동 영역입니다.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -256,9 +264,7 @@ HTML
             loadNaverMapEngine(); 
         }
 
-        // 🗺️ 제공해주신 플레이스 ID 기반 정밀 매핑 엔진
         function loadNaverMapEngine() {
-            // 네이버 스마트플레이스 ID(1210319057) '일산열쇠도장'의 정확한 실제 등록 좌표 데이터
             const lat = 37.658632;
             const lng = 126.794621;
             
@@ -275,7 +281,6 @@ HTML
                 map: map
             });
 
-            // 마커 및 상호명 말풍선 클릭 시 사장님의 실제 플레이스 정보 주소로 원터치 이동하도록 바인딩
             const placeUrl = "https://map.naver.com/p/entry/place/1210319057";
             const infowindow = new naver.maps.InfoWindow({
                 content: `
