@@ -5,9 +5,9 @@ HTML
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>일산열쇠도장 - 고양시 전지역 즉시출동</title>
-    <!-- Tailwind CSS (현대적인 디자인 컴포넌트 라이브러리) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- FontAwesome (메뉴 및 전화 아이콘용) -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- 🗺️ 네이버 지도 공식 Web API (공용 API Key 탑재) -->
@@ -17,7 +17,6 @@ HTML
         html { scroll-behavior: smooth; }
         .fixed-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
         body { padding-top: 110px; font-family: 'Noto Sans KR', sans-serif; }
-        /* 사장님 전용 편집모드 가이드 스타일 */
         [contenteditable="true"]:hover { background-color: rgba(239, 68, 68, 0.05); outline: 2px dashed #ef4444; }
         [contenteditable="true"]:focus { background-color: rgba(239, 68, 68, 0.1); outline: 2px solid #ef4444; }
     </style>
@@ -33,42 +32,36 @@ HTML
     <!-- 1. 헤더 (고정 내비게이션 + 간판 + 긴급전화 버튼) -->
     <header class="fixed-header bg-white shadow-md top-[32px]">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <!-- 간판 -->
             <a href="#" class="text-base font-bold text-red-600 flex items-center gap-2">
                 <i class="fa-solid fa-key text-sm"></i> 일산열쇠도장
             </a>
-            <!-- 고정 내비게이션 메뉴 -->
             <nav class="hidden md:flex space-x-6 font-medium text-sm">
                 <a href="#services" class="hover:text-red-600 transition">서비스 소개</a>
                 <a href="#trust" class="hover:text-red-600 transition">선택 이유</a>
                 <a href="#reviews" class="hover:text-red-600 transition">고객후기</a>
                 <a href="#contact" class="hover:text-red-600 transition">오시는 길</a>
             </nav>
-            <!-- 긴급전화 버튼 -->
             <a href="tel:010-4245-0205" class="bg-red-600 text-white px-4 py-2 rounded-full font-bold animate-pulse flex items-center gap-2 text-xs md:text-sm">
                 <i class="fa-solid fa-phone"></i> 긴급출동전화
             </a>
         </div>
     </header>
 
-    <!-- 2. 히어로 섹션 (상호명 최대 강조 크기 조절 완료) -->
+    <!-- 2. 히어로 섹션 -->
     <section class="bg-slate-900 text-white py-20 text-center relative overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1510519138101-570d1dca3d66?auto=format&fit=crop&w=1200&q=80');"></div>
         <div class="container mx-auto px-4 relative z-10">
             <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full tracking-wider">신속 정확 안전 보장</span>
             
-            <!-- 👑 상호명 '일산열쇠도장'을 가장 크고 웅장하게 배치 -->
             <h1 class="text-4xl md:text-6xl font-black mt-6 mb-4 text-white tracking-tight drop-shadow-lg">
                 일산열쇠도장
             </h1>
             
-            <!-- ⚡ 출동 관련 안내 텍스트는 서브 타이틀로 한 단계 작고 깔끔하게 배치 -->
             <p class="text-lg md:text-2xl font-bold text-gray-200 mb-8 leading-tight max-w-2xl mx-auto">
                 고양시 전 지역 <span class="text-yellow-400">즉시 출동!</span><br>
                 <span class="text-base md:text-lg font-medium text-gray-300">24시 열쇠 · 도장 · 인장 해결사</span>
             </p>
 
-            <!-- 대표 전화번호 안내 박스 -->
             <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl max-w-xl mx-auto inline-block border border-white/20 shadow-2xl">
                 <p class="text-sm text-gray-300 mb-1">상담 및 즉시출동 직통번호</p>
                 <div class="text-2xl md:text-4xl font-black text-yellow-300 tracking-wide mb-2">
@@ -81,7 +74,7 @@ HTML
         </div>
     </section>
 
-    <!-- 3. 실적 바 (업력 30년, 만족도 98% 강조) -->
+    <!-- 3. 실적 바 -->
     <section class="bg-red-600 text-white py-6 shadow-inner">
         <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
@@ -103,20 +96,19 @@ HTML
         </div>
     </section>
 
-    <!-- 4. 서비스 소개 (7가지 서비스 일괄 배치, 다중 이미지 캐러셀 + 글자 실시간 편집창) -->
+    <!-- 4. 서비스 소개 -->
     <section id="services" class="py-20 container mx-auto px-4">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold border-b-4 border-red-600 inline-block pb-2">제공 서비스 안내</h2>
             <p class="text-gray-600 mt-4 text-sm">아래의 글자를 클릭하여 직접 수정할 수 있으며, 여러 장의 이미지를 등록해 슬라이더로 넘겨볼 수 있습니다.</p>
         </div>
         
-        <!-- 실시간 데이터가 표시되는 컨테이너 박스 -->
         <div id="servicesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- 자바스크립트를 통해 7가지 항목이 이곳에 동적으로 그려집니다. -->
+            <!-- 동적 서비스 카드 렌더링 영역 -->
         </div>
     </section>
 
-    <!-- 5. 신뢰 포인트 (선택 이유 4가지) -->
+    <!-- 5. 신뢰 포인트 -->
     <section id="trust" class="bg-slate-100 py-20">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
@@ -155,7 +147,6 @@ HTML
             <p class="text-gray-600 mt-2 text-sm">일산열쇠도장을 이용하신 고객님들이 직접 써주신 한줄 평가입니다.</p>
         </div>
 
-        <!-- 후기 작성 공간 -->
         <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 mb-8">
             <h3 class="font-bold text-base mb-4 text-gray-950"><i class="fa-regular fa-comment-dots text-red-600"></i> 후기 등록하기</h3>
             <form id="reviewForm" onsubmit="addReview(event)" class="space-y-4">
@@ -175,7 +166,6 @@ HTML
             </form>
         </div>
 
-        <!-- 후기 누적 출력 리스트 -->
         <div id="reviewList" class="space-y-4"></div>
     </section>
 
@@ -188,7 +178,6 @@ HTML
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <!-- 상세 주소 텍스트 컴포넌트 -->
                 <div class="space-y-6">
                     <div class="flex items-start gap-4">
                         <div class="bg-red-600 p-3 rounded-lg text-lg shrink-0"><i class="fa-solid fa-location-dot"></i></div>
@@ -215,10 +204,8 @@ HTML
                     </div>
                 </div>
 
-                <!-- 🗺️ 정식 플레이스 고유값 연동 지도 영역 -->
                 <div class="w-full h-80 rounded-xl overflow-hidden shadow-2xl bg-gray-100 relative">
                     <div id="naverMap" class="w-full h-full"></div>
-                    <!-- 스마트폰 연동 원터치 플레이스 홈 이동 배너 -->
                     <div class="absolute bottom-2 right-2 bg-black/70 px-3 py-1 rounded text-[11px] z-50">
                         <a href="https://map.naver.com/p/entry/place/1210319057" target="_blank" class="text-yellow-400 font-bold hover:underline">네이버 지도에서 보기 →</a>
                     </div>
@@ -227,16 +214,14 @@ HTML
         </div>
     </section>
 
-    <!-- 하단 라이선스 가이드 푸터 -->
     <footer class="bg-slate-950 text-gray-500 py-6 text-center text-xs">
         <p>© 2026 일산열쇠도장. All Rights Reserved. (백마마을 한양금호 3단지 상가 1층)</p>
     </footer>
 
-    <!-- 크로스 브라우저 호환 제어 스크립트 -->
     <script>
-        // 사장님 요청 7가지 서비스 마스터 스키마 배열
+        // 🔒 중요: 긴 인터넷 주소(URL) 대신 사장님이 업로드한 파일 이름을 다이렉트로 매핑했습니다.
         const defaultServices = [
-            { id: 0, title: "디지털도어락", desc: "국산 전 브랜드 최신 푸시풀 및 지문인식 번호키 당일 신속 완벽 설치. 문 잠김 파손 없이 안전 개문 서비스 제공", images: ["https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=500&q=80", "https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=500&q=80"] },
+            { id: 0, title: "디지털도어락", desc: "국산 전 브랜드 최신 푸시풀 및 지문인식 번호키 당일 신속 완벽 설치. 문 잠김 파손 없이 안전 개문 서비스 제공", images: ["door1.jpg", "door2.jpg", "door3.jpg"] },
             { id: 1, title: "아날로그도어락", desc: "안전 보조키, 특수 실린더키, 현관 레버락, 대문용 개폐기 설치 및 노후 잠금장치 고장 수리 일체", images: ["https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=500&q=80"] },
             { id: 2, title: "자동차키", desc: "국산 및 수입 차량 차키 분실 시 현장으로 직행. 이모빌라이저 키복원부터 스마트키 코딩까지 즉석 제작", images: ["https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=500&q=80"] },
             { id: 3, title: "열쇠복사", desc: "정밀 전용 복사 장비를 통한 수입 오토바이키, 특수키, 일반 열쇠 오차 없는 정밀 복사 시스템", images: ["https://images.unsplash.com/photo-1619120238346-978e07731e77?auto=format&fit=crop&w=500&q=80"] },
@@ -253,9 +238,9 @@ HTML
         let activeImageIndices = {};
 
         window.onload = function() {
-            if(!localStorage.getItem('ilsan_services')) {
-                localStorage.setItem('ilsan_services', JSON.stringify(defaultServices));
-            }
+            // 새로 세팅된 로컬 파일 구조를 적용하기 위해 일시적으로 갱신합니다.
+            localStorage.setItem('ilsan_services', JSON.stringify(defaultServices));
+            
             if(!localStorage.getItem('ilsan_reviews')) {
                 localStorage.setItem('ilsan_reviews', JSON.stringify(defaultReviews));
             }
@@ -275,7 +260,6 @@ HTML
             };
             
             const map = new naver.maps.Map('naverMap', mapOptions);
-
             const marker = new naver.maps.Marker({
                 position: new naver.maps.LatLng(lat, lng),
                 map: map
@@ -295,7 +279,6 @@ HTML
             });
             
             infowindow.open(map, marker);
-            
             naver.maps.Event.addListener(marker, "click", function() {
                 window.open(placeUrl, "_blank");
             });
@@ -311,7 +294,7 @@ HTML
                     activeImageIndices[srv.id] = 0;
                 }
                 const currentIdx = activeImageIndices[srv.id];
-                const currentImgUrl = srv.images[currentIdx] || "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=500&q=80";
+                const currentImgUrl = srv.images[currentIdx] || "";
 
                 container.innerHTML += `
                     <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 flex flex-col justify-between">
@@ -347,12 +330,12 @@ HTML
         function editImagesUrls(id) {
             const services = JSON.parse(localStorage.getItem('ilsan_services'));
             const item = services.find(s => s.id === id);
-            const userPrompt = prompt("💡 이 서비스에 표시할 이미지 주소(URL)를 입력해 주세요.\n여러 장을 등록하시려면 키보드 엔터(줄바꿈)를 눌러 한 줄에 하나씩 적어주시면 됩니다:", item.images.join("\n"));
+            const userPrompt = prompt("💡 이 서비스에 표시할 이미지 파일명을 입력해 주세요.\n여러 장을 등록하시려면 줄바꿈을 눌러 한 줄에 하나씩 적어주시면 됩니다:", item.images.join("\n"));
             
             if(userPrompt !== null) {
                 const parsedImages = userPrompt.split("\n").map(line => line.trim()).filter(line => line.length > 0);
                 if(parsedImages.length === 0) {
-                    alert("최소 1개 이상의 올바른 이미지 링크 주소를 명시해야 합니다.");
+                    alert("최소 1개 이상의 올바른 이미지 파일명을 입력해야 합니다.");
                     return;
                 }
                 item.images = parsedImages;
