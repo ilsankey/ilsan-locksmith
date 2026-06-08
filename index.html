@@ -95,40 +95,22 @@ HTML
         <div id="servicesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </section>
 
-    <!-- 🔍 5. [수정 완료] 무조건 눈에 보이는 선명한 화살표 단추가 탑재된 확대 모달 -->
+    <!-- 5. 확대 모달 -->
     <div id="imageModal" class="hidden fixed inset-0 bg-black/95 z-[2000] justify-center items-center p-4 cursor-zoom-out modal-fade" onclick="closeModal()">
-        <!-- 상단 우측 닫기 버튼 -->
-        <button class="absolute top-6 right-6 text-white text-xl font-bold bg-gray-800 hover:bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center border border-gray-600 shadow-xl z-[2003]" style="font-family: sans-serif;">
-            X
-        </button>
-        
-        <!-- ◀ 왼쪽 화살표 버튼 (무조건 보이도록 흰색 글자에 붉은색 포인트 배경 배치) -->
-        <button onclick="event.stopPropagation(); navigateModalImg(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full text-xl font-black shadow-2xl z-[2002] flex items-center justify-center transition border-2 border-white cursor-pointer">
-            ◀
-        </button>
-        
-        <!-- ▶ 오른쪽 화살표 버튼 -->
-        <button onclick="event.stopPropagation(); navigateModalImg(1)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full text-xl font-black shadow-2xl z-[2002] flex items-center justify-center transition border-2 border-white cursor-pointer">
-            ▶
-        </button>
-        
-        <!-- 이미지 및 하단 순서 표시란 -->
+        <button class="absolute top-6 right-6 text-white text-xl font-bold bg-gray-800 hover:bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center border border-gray-600 shadow-xl z-[2003]" style="font-family: sans-serif;">X</button>
+        <button onclick="event.stopPropagation(); navigateModalImg(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full text-xl font-black shadow-2xl z-[2002] flex items-center justify-center transition border-2 border-white cursor-pointer">◀</button>
+        <button onclick="event.stopPropagation(); navigateModalImg(1)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full text-xl font-black shadow-2xl z-[2002] flex items-center justify-center transition border-2 border-white cursor-pointer">▶</button>
         <div class="max-w-full max-h-[85vh] flex flex-col justify-center items-center relative" onclick="event.stopPropagation()">
             <img id="modalTargetImg" src="" alt="확대 이미지" class="max-w-full max-h-[80vh] rounded shadow-2xl object-contain select-none">
             <div id="modalImgCounter" class="mt-4 bg-black/70 text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wide border border-gray-600">1 / 3</div>
         </div>
     </div>
 
-    <!-- 📝 5-2. 여러 줄 입력 가능한 이미지 주소 전용 편집 창 -->
+    <!-- 5-2. 이미지 주소 전용 편집 창 -->
     <div id="urlEditModal" class="hidden fixed inset-0 bg-black/60 z-[2000] justify-center items-center p-4 modal-fade">
         <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 relative">
-            <h3 class="text-lg font-bold text-gray-950 mb-2 flex items-center gap-2">
-                <i class="fa-regular fa-images text-red-600"></i> 이미지 주소 편집란
-            </h3>
-            <p class="text-xs text-gray-500 mb-4 leading-relaxed">
-                💡 인터넷에서 복사한 사진 주소들을 입력해 주세요.<br>
-                <strong>엔터(줄바꿈)를 치거나 쉼표(,)를 찍어서 주소들을 구분해 적으시면 사진이 추가됩니다.</strong>
-            </p>
+            <h3 class="text-lg font-bold text-gray-950 mb-2 flex items-center gap-2"><i class="fa-regular fa-images text-red-600"></i> 이미지 주소 편집란</h3>
+            <p class="text-xs text-gray-500 mb-4 leading-relaxed">💡 인터넷에서 복사한 사진 주소들을 입력해 주세요.<br><strong>엔터(줄바꿈)를 치거나 쉼표(,)를 찍어서 주소들을 구분해 적으시면 사진이 추가됩니다.</strong></p>
             <input type="hidden" id="editingServiceId">
             <textarea id="urlTextArea" rows="8" class="w-full p-3 border border-gray-300 rounded-lg text-xs font-mono bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500 mb-4 placeholder-gray-400" placeholder="예시)&#10;images/door1.jpg&#10;https://blogfiles.naver.net/..."></textarea>
             <div class="flex justify-end gap-2 text-xs font-bold">
@@ -190,7 +172,7 @@ HTML
         <div id="reviewList" class="space-y-4"></div>
     </section>
 
-    <!-- 8. 연락처 / 오시는 길 -->
+    <!-- 🗺️ 8. [수정 완료] 텍스트가 아닌 실제 네이버 지도가 통째로 박혀 나오는 오시는 길 섹션 -->
     <section id="contact" class="py-20 bg-slate-900 text-white">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="text-center mb-12"><h2 class="text-3xl font-bold">연락처 및 오시는 길</h2></div>
@@ -220,11 +202,9 @@ HTML
                         </div>
                     </div>
                 </div>
+                <!-- 🛠️ 실제 네이버 지도 화면이 강제로 그려지는 캔버스 영역 -->
                 <div class="w-full h-80 rounded-xl overflow-hidden shadow-2xl bg-gray-100 relative">
-                    <div id="naverMap" class="w-full h-full"></div>
-                    <div class="absolute bottom-2 right-2 bg-black/70 px-3 py-1 rounded text-[11px] z-50">
-                        <a href="https://map.naver.com/p/entry/place/1210319057" target="_blank" class="text-yellow-400 font-bold hover:underline">네이버 지도에서 보기 →</a>
-                    </div>
+                    <div id="naverMap" class="w-full h-full text-slate-900"></div>
                 </div>
             </div>
         </div>
@@ -263,21 +243,51 @@ HTML
             }
             renderServices();
             renderReviews();
-            loadNaverMapEngine(); 
+            
+            // 🗺️ 페이지가 로딩되자마자 네이버 공식 지도를 생성하는 핵심 함수 호출
+            setTimeout(loadNaverMapEngine, 200);
             
             document.addEventListener('keydown', handleKeyDown);
         }
 
+        // 🔧 [패치] 하단에 [네이버지도 바로보기] 텍스트를 제거하고, 화면 상에 네이버 인터랙티브 지도를 강제 주입
         function loadNaverMapEngine() {
-            const lat = 37.658632; const lng = 126.794621;
-            const mapOptions = { center: new naver.maps.LatLng(lat, lng), zoom: 16, zoomControl: true };
+            const lat = 37.658632; 
+            const lng = 126.794621;
+            
+            // 네이버 지도 객체 생성 및 위치 조정
+            const mapOptions = { 
+                center: new naver.maps.LatLng(lat, lng), 
+                zoom: 16, 
+                zoomControl: true 
+            };
             const map = new naver.maps.Map('naverMap', mapOptions);
-            const marker = new naver.maps.Marker({ position: new naver.maps.LatLng(lat, lng), map: map });
-            const placeUrl = "https://map.naver.com/p/entry/place/1210319057";
-            const infowindow = new naver.maps.InfoWindow({
-                content: `<div style="padding:10px;font-size:12px;text-align:center;line-height:140%;min-width:160px;"><a href="${placeUrl}" target="_blank" style="text-decoration:none;color:inherit;"><strong style="color:#e11d48;font-size:13px;">🔑 일산열쇠도장</strong><br><span style="color:#4b5563;font-size:11px;">백마마을 3단지 상가 1층</span><br><span style="color:#16a34a;font-weight:bold;font-size:10px;display:inline-block;margin-top:2px;">네이버 플레이스 바로가기 ↗</span></a></div>`
+            
+            // 일산열쇠도장 빨간색 핀(마커) 꽂기
+            const marker = new naver.maps.Marker({ 
+                position: new naver.maps.LatLng(lat, lng), 
+                map: map 
             });
+            
+            // 마커 클릭 시 넘어갈 실제 플레이스 링크
+            const placeUrl = "https://map.naver.com/p/entry/place/1210319057";
+            
+            // 지도 위에 겹쳐 보일 말풍선 정보창 커스텀 디자인
+            const infowindow = new naver.maps.InfoWindow({
+                content: `
+                    <div style="padding:10px; font-size:12px; text-align:center; line-height:140%; min-width:180px;">
+                        <a href="${placeUrl}" target="_blank" style="text-decoration:none; color:#111827; font-family:sans-serif;">
+                            <strong style="color:#e11d48; font-size:13px; display:block; margin-bottom:2px;">🔑 일산열쇠도장</strong>
+                            <span style="color:#4b5563; font-size:11px; display:block;">백마마을 3단지 상가 1층</span>
+                            <span style="color:#16a34a; font-weight:bold; font-size:11px; display:inline-block; margin-top:4px; border-top:1px solid #e5e7eb; pt-1; width:100%;">네이버 플레이스 연결 ↗</span>
+                        </a>
+                    </div>
+                `
+            });
+            
             infowindow.open(map, marker);
+            
+            // 지도 화면이나 핀을 누르면 손님들이 네이버 플레이스로 바로 이동하도록 설정
             naver.maps.Event.addListener(marker, "click", function() { window.open(placeUrl, "_blank"); });
         }
 
