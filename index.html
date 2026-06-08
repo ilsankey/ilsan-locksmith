@@ -5,9 +5,7 @@ HTML
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>일산열쇠도장 - 고양시 전지역 즉시출동</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -22,13 +20,11 @@ HTML
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- 🔧 상단 관리자 안내 바 -->
     <div class="admin-header-bar bg-slate-800 text-white text-xs text-center px-4 flex justify-between items-center shadow-lg">
-        <span class="truncate">🛠️ <strong>사장님 전용 관리모드:</strong> 절대 차단되지 않는 국내 공용 이미지로 전면 교체되었습니다.</span>
+        <span class="truncate">🛠️ <strong>사장님 전용 관리모드:</strong> 꼬여있던 과거 이미지 캐시를 강제로 청소하고 리셋했습니다.</span>
         <button onclick="saveAllData()" class="bg-red-600 hover:bg-red-700 text-white font-bold px-3 py-1 rounded text-[11px] transition shrink-0 ml-2 shadow">변경사항 저장하기</button>
     </div>
 
-    <!-- 1. 헤더 -->
     <header class="fixed-header bg-white shadow-md">
         <div class="container mx-auto px-4 h-full flex justify-between items-center">
             <a href="#" class="text-base font-bold text-red-600 flex items-center gap-2">
@@ -46,9 +42,8 @@ HTML
         </div>
     </header>
 
-    <!-- 2. 히어로 섹션 -->
     <section class="bg-slate-900 text-white py-24 text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center opacity-20 select-none pointer-events-none" style="background-image: url('https://w.namu.la/s/f7c1bbbf6db9f6b9868e6121d5568bd7b7be35eb84f3df9be8217bbba9d28a5bc7d9ecb13df1869cbda0444558df6dfb1e9bb15dfce6926065ea07b0ec2298715871f37e4604d508e7ff1c15f9226f9a');"></div>
+        <div class="absolute inset-0 bg-cover bg-center opacity-20 select-none pointer-events-none" style="background-image: url('https://pub.idqqc.com/containers/images/2021-08-31/1630386221434-20.jpg');"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-900/50 to-slate-950/80"></div>
         <div class="container mx-auto px-4 relative z-10">
             <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full tracking-wider">신속 정확 안전 보장</span>
@@ -69,7 +64,6 @@ HTML
         </div>
     </section>
 
-    <!-- 3. 실적 바 -->
     <section class="bg-red-600 text-white py-6 shadow-inner">
         <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div><p class="text-3xl font-black text-yellow-300">30년</p><p class="text-xs text-red-100 mt-1">현장 노하우 업력</p></div>
@@ -79,16 +73,14 @@ HTML
         </div>
     </section>
 
-    <!-- 4. 서비스 소개 -->
     <section id="services" class="py-20 container mx-auto px-4">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold border-b-4 border-red-600 inline-block pb-2">제공 서비스 안내</h2>
-            <p class="text-gray-600 mt-4 text-sm">각 항목 하단의 버튼을 눌러 사진 주소를 바꾸거나 추가하실 수 있습니다.</p>
+            <p class="text-gray-600 mt-4 text-sm">각 항목 하단의 버튼을 눌러 사진 주소를 자유롭게 편집할 수 있습니다.</p>
         </div>
         <div id="servicesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </section>
 
-    <!-- 5. 확대 모달 -->
     <div id="imageModal" class="hidden fixed inset-0 bg-black/95 z-[2000] justify-center items-center p-4 cursor-zoom-out modal-fade" onclick="closeModal()">
         <button class="absolute top-6 right-6 text-white text-xl font-bold bg-gray-800 hover:bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center border border-gray-600 shadow-xl z-[2003]" style="font-family: sans-serif;">X</button>
         <button onclick="event.stopPropagation(); navigateModalImg(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full text-xl font-black shadow-2xl z-[2002] flex items-center justify-center transition border-2 border-white cursor-pointer">◀</button>
@@ -99,7 +91,6 @@ HTML
         </div>
     </div>
 
-    <!-- 5-2. 이미지 주소 전용 편집 창 -->
     <div id="urlEditModal" class="hidden fixed inset-0 bg-black/60 z-[2000] justify-center items-center p-4 modal-fade">
         <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 relative">
             <h3 class="text-lg font-bold text-gray-950 mb-2 flex items-center gap-2"><i class="fa-regular fa-images text-red-600"></i> 이미지 주소 편집란</h3>
@@ -113,7 +104,6 @@ HTML
         </div>
     </div>
 
-    <!-- 6. 신뢰 포인트 -->
     <section id="trust" class="bg-slate-100 py-20">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900">왜 일산열쇠도장일까요?</h2></div>
@@ -142,7 +132,6 @@ HTML
         </div>
     </section>
 
-    <!-- 7. 고객후기란 -->
     <section id="reviews" class="py-20 container mx-auto px-4 max-w-4xl">
         <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900">소중한 고객 후기</h2></div>
         <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 mb-8">
@@ -165,7 +154,6 @@ HTML
         <div id="reviewList" class="space-y-4"></div>
     </section>
 
-    <!-- 8. 오시는 길 -->
     <section id="contact" class="py-20 bg-slate-900 text-white">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="text-center mb-12"><h2 class="text-3xl font-bold">연락처 및 오시는 길</h2></div>
@@ -225,12 +213,12 @@ HTML
     </footer>
 
     <script>
-        // 🔒 절대 차단될 수 없는 국내 공용 웹 자원 주소로 완전히 덮어씌웠습니다.
+        // 🔒 브라우저에 박혀있던 낡고 깨진 이미지 기억을 완전히 파괴하고 새 주소를 세팅합니다.
         const defaultServices = [
-            { id: 0, title: "디지털도어락", desc: "국산 전 브랜드 최신 푸시풀 및 지문인식 번호키 당일 신속 완벽 설치. 문 잠김 파손 없이 안전 개문 서비스 제공", images: ["https://w.namu.la/s/f7c1bbbf6db9f6b9868e6121d5568bd7b7be35eb84f3df9be8217bbba9d28a5bc7d9ecb13df1869cbda0444558df6dfb1e9bb15dfce6926065ea07b0ec2298715871f37e4604d508e7ff1c15f9226f9a"] },
-            { id: 1, title: "아날로그도어락", desc: "안전 보조키, 특수 실린더키, 현관 레버락, 대문용 개폐기 설치 및 노후 잠금장치 고장 수리 일체", images: ["https://w.namu.la/s/32be60086395ec40df5f7b889fa6e99c30fccf5be0bfbd749eb4eb9cbef6db6e64ec39ef1da5ca411084b4fcbb41a01b22e1dd5dfde5bda14236b2f767856bd31a9efda808a3f8fa8b70ea01ecfc0f1a"] },
-            { id: 2, title: "자동차키", desc: "국산 및 수입 차량 차키 분실 시 현장으로 직행. 이모빌라이저 키복원부터 스마트키 코딩까지 즉석 제작", images: ["https://w.namu.la/s/60b64f3316ca88dfbc7f8da46bb2bdf0a6932402dbbf80fe37b19bf3e96645318db67776f827297e682e703ff3e0b8cf8347e4eb1202e20b33230a109a2bc3f4164b3efeecc7a9611db8905bf3358043"] },
-            { id: 3, title: "열쇠복사", desc: "정밀 전용 복사 장비를 통한 수입 오토바이키, 특수키, 일반 열쇠 오차 없는 정밀 복사 시스템", images: ["https://pub.idqqc.com/containers/images/2021-08-31/1630386221434-20.jpg"] },
+            { id: 0, title: "디지털도어락", desc: "국산 전 브랜드 최신 푸시풀 및 지문인식 번호키 당일 신속 완벽 설치. 문 잠김 파손 없이 안전 개문 서비스 제공", images: ["https://pub.idqqc.com/containers/images/2021-08-31/1630386221434-20.jpg"] },
+            { id: 1, title: "아날로그도어락", desc: "안전 보조키, 특수 실린더키, 현관 레버락, 대문용 개폐기 설치 및 노후 잠금장치 고장 수리 일체", images: ["https://pub.idqqc.com/containers/images/2021-08-31/1630386230491-23.jpg"] },
+            { id: 2, title: "자동차키", desc: "국산 및 수입 차량 차키 분실 시 현장으로 직행. 이모빌라이저 키복원부터 스마트키 코딩까지 즉석 제작", images: ["https://pub.idqqc.com/containers/images/2021-08-31/1630386193796-6.jpg"] },
+            { id: 3, title: "열쇠복사", desc: "정밀 전용 복사 장비를 통한 수입 오토바이키, 특수키, 일반 열쇠 오차 없는 정밀 복사 시스템", images: ["https://pub.idqqc.com/containers/images/2021-08-31/1630386200236-9.jpg"] },
             { id: 4, title: "도장", desc: "법인 인감도장, 개인 서명용 인감, 목도장, 결재 직인 등 용도별 고급 서체 맞춤형 즉석 조각 전담", images: ["https://pub.idqqc.com/containers/images/2021-08-31/1630386184714-3.jpg"] },
             { id: 5, title: "스탬프", desc: "편리한 만년인, 사업자 등록 스탬프, 자동 스탬프 등 별도의 패드가 필요 없는 고품질 스탬프 제작", images: ["https://pub.idqqc.com/containers/images/2021-08-31/1630386205898-12.jpg"] },
             { id: 6, title: "사주감명 인장제작", desc: "정통 명리학 사주 감명을 통해 선천적 기운을 완벽히 보강하고 발복을 유도하는 최고급 수제 사주 인장", images: ["https://pub.idqqc.com/containers/images/2021-08-31/1630386214227-16.jpg"] }
@@ -245,8 +233,9 @@ HTML
         let currentModalServiceId = null;
         let currentModalImgIndex = 0;
 
+        // 핵심 로직: 켜질 때 예전 기억을 무조건 청소(Clear)해 꼬임을 방지합니다.
         window.onload = function() {
-            // 브라우저 찌꺼기 캐시를 완전히 날리고 새 주소로 고정합니다.
+            localStorage.removeItem('ilsan_services'); 
             localStorage.setItem('ilsan_services', JSON.stringify(defaultServices));
             if(!localStorage.getItem('ilsan_reviews')) {
                 localStorage.setItem('ilsan_reviews', JSON.stringify(defaultReviews));
@@ -392,7 +381,7 @@ HTML
                 if(currentDescNode) srv.desc = currentDescNode.innerText.trim();
             });
             localStorage.setItem('ilsan_services', JSON.stringify(services));
-            alert("🔒 사장님이 변경하신 정보가 브라우저에 안전하게 저장되었습니다.");
+            alert("🔒 변경하신 정보가 브라우저에 저장되었습니다.");
             renderServices();
         }
 
