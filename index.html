@@ -5,12 +5,9 @@ HTML
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>일산열쇠도장 - 고양시 전지역 즉시출동</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- 🗺️ 네이버 지도 공식 Web API (공용 API Key 탑재) -->
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=83bfun76ee"></script>
     
     <style>
@@ -30,13 +27,11 @@ HTML
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- 🔧 상단 관리자 안내 바 -->
     <div class="admin-header-bar bg-slate-800 text-white text-xs text-center px-4 flex justify-between items-center shadow-lg">
         <span class="truncate">🛠️ <strong>사장님 전용 관리모드:</strong> 글자 수정 및 이미지 주소 변경 후 우측 버튼을 꼭 눌러주세요.</span>
         <button onclick="saveAllData()" class="bg-red-600 hover:bg-red-700 text-white font-bold px-3 py-1 rounded text-[11px] transition shrink-0 ml-2 shadow">변경사항 저장하기</button>
     </div>
 
-    <!-- 1. 헤더 -->
     <header class="fixed-header bg-white shadow-md">
         <div class="container mx-auto px-4 h-full flex justify-between items-center">
             <a href="#" class="text-base font-bold text-red-600 flex items-center gap-2">
@@ -54,7 +49,6 @@ HTML
         </div>
     </header>
 
-    <!-- 2. 히어로 섹션 -->
     <section class="bg-slate-900 text-white py-20 text-center relative overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1510519138101-570d1dca3d66?auto=format&fit=crop&w=1200&q=80');"></div>
         <div class="container mx-auto px-4 relative z-10">
@@ -76,7 +70,6 @@ HTML
         </div>
     </section>
 
-    <!-- 3. 실적 바 -->
     <section class="bg-red-600 text-white py-6 shadow-inner">
         <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div><p class="text-3xl font-black text-yellow-300">30년</p><p class="text-xs text-red-100 mt-1">현장 노하우 업력</p></div>
@@ -86,26 +79,32 @@ HTML
         </div>
     </section>
 
-    <!-- 4. 서비스 소개 -->
     <section id="services" class="py-20 container mx-auto px-4">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold border-b-4 border-red-600 inline-block pb-2">제공 서비스 안내</h2>
-            <p class="text-gray-600 mt-4 text-sm">이미지를 클릭하시면 큰 화면으로 안전하게 확대됩니다.</p>
+            <p class="text-gray-600 mt-4 text-sm">이미지를 클릭하시면 큰 화면으로 확대되며, 확대한 상태에서 좌우로 넘겨보실 수 있습니다.</p>
         </div>
         <div id="servicesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </section>
 
-    <!-- 🔍 5. 이미지 확대 보기 모달 팝업 창 -->
-    <div id="imageModal" class="hidden fixed inset-0 bg-black/95 z-[2000] justify-center items-center p-2 sm:p-4 cursor-zoom-out modal-fade" onclick="closeModal()">
-        <button class="absolute top-6 right-6 text-white text-3xl opacity-75 hover:opacity-100 transition shrink-0 z-[2001] bg-black/40 w-10 h-10 rounded-full flex items-center justify-center">
+    <div id="imageModal" class="hidden fixed inset-0 bg-black/95 z-[2000] justify-center items-center p-4 cursor-zoom-out modal-fade" onclick="closeModal()">
+        <button class="absolute top-6 right-6 text-white text-3xl opacity-75 hover:opacity-100 transition shrink-0 z-[2001] bg-black/40 w-12 h-12 rounded-full flex items-center justify-center">
             <i class="fa-solid fa-xmark"></i>
         </button>
-        <div class="max-w-full max-h-[90vh] flex justify-center items-center relative" onclick="event.stopPropagation()">
-            <img id="modalTargetImg" src="" alt="확대 이미지" class="max-w-full max-h-[90vh] rounded shadow-2xl object-contain select-none">
+        
+        <button onclick="event.stopPropagation(); navigateModalImg(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white w-12 h-12 rounded-full text-lg font-bold hover:bg-black/80 z-[2002] flex items-center justify-center transition">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button onclick="event.stopPropagation(); navigateModalImg(1)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white w-12 h-12 rounded-full text-lg font-bold hover:bg-black/80 z-[2002] flex items-center justify-center transition">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        
+        <div class="max-w-full max-h-[85vh] flex flex-col justify-center items-center relative" onclick="event.stopPropagation()">
+            <img id="modalTargetImg" src="" alt="확대 이미지" class="max-w-full max-h-[80vh] rounded shadow-2xl object-contain select-none">
+            <div id="modalImgCounter" class="mt-4 bg-black/70 text-white px-3 py-1 rounded-full text-xs font-mono tracking-wide">1 / 3</div>
         </div>
     </div>
 
-    <!-- 📝 5-2. 여러 줄 입력 가능한 이미지 주소 전용 편집 창 (개선 버전) -->
     <div id="urlEditModal" class="hidden fixed inset-0 bg-black/60 z-[2000] justify-center items-center p-4 modal-fade">
         <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 relative">
             <h3 class="text-lg font-bold text-gray-950 mb-2 flex items-center gap-2">
@@ -124,7 +123,6 @@ HTML
         </div>
     </div>
 
-    <!-- 6. 신뢰 포인트 -->
     <section id="trust" class="bg-slate-100 py-20">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900">왜 일산열쇠도장일까요?</h2></div>
@@ -153,7 +151,6 @@ HTML
         </div>
     </section>
 
-    <!-- 7. 고객후기란 -->
     <section id="reviews" class="py-20 container mx-auto px-4 max-w-4xl">
         <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900">소중한 고객 후기</h2></div>
         <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 mb-8">
@@ -176,7 +173,6 @@ HTML
         <div id="reviewList" class="space-y-4"></div>
     </section>
 
-    <!-- 8. 연락처 / 오시는 길 -->
     <section id="contact" class="py-20 bg-slate-900 text-white">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="text-center mb-12"><h2 class="text-3xl font-bold">연락처 및 오시는 길</h2></div>
@@ -237,6 +233,10 @@ HTML
         ];
 
         let activeImageIndices = {};
+        
+        // 확대보기(모달) 슬라이더용 전역 변수
+        let currentModalServiceId = null;
+        let currentModalImgIndex = 0;
 
         window.onload = function() {
             if(!localStorage.getItem('ilsan_services')) {
@@ -248,6 +248,9 @@ HTML
             renderServices();
             renderReviews();
             loadNaverMapEngine(); 
+            
+            // 키보드 방향키 리스너 연결 (←, → 로 확대사진 제어 가능)
+            document.addEventListener('keydown', handleKeyDown);
         }
 
         function loadNaverMapEngine() {
@@ -277,7 +280,7 @@ HTML
                     <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 flex flex-col justify-between">
                         <div>
                             <div class="relative w-full h-48 bg-gray-200 select-none cursor-zoom-in">
-                                <img src="${currentImgUrl}" alt="${srv.title}" class="w-full h-48 object-cover" onclick="openModal('${currentImgUrl}')" onerror="this.src='https://placehold.co/600x400?text=사진을+등록해주세요'">
+                                <img src="${currentImgUrl}" alt="${srv.title}" class="w-full h-48 object-cover" onclick="openModal(${srv.id}, ${currentIdx})" onerror="this.src='https://placehold.co/600x400?text=사진을+등록해주세요'">
                                 ${srv.images.length > 1 ? `
                                     <button onclick="event.stopPropagation(); changeImg(${srv.id}, -1, ${srv.images.length})" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 text-white w-7 h-7 rounded-full text-xs font-bold hover:bg-black/90 z-20"><i class="fa-solid fa-chevron-left"></i></button>
                                     <button onclick="event.stopPropagation(); changeImg(${srv.id}, 1, ${srv.images.length})" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 text-white w-7 h-7 rounded-full text-xs font-bold hover:bg-black/90 z-20"><i class="fa-solid fa-chevron-right"></i></button>
@@ -299,14 +302,58 @@ HTML
             });
         }
 
-        function openModal(imgSrc) {
+        /* 🔍 기능 업그레이드: 확대 상태에서 슬라이드 연동 */
+        function openModal(serviceId, imgIndex) {
+            const services = JSON.parse(localStorage.getItem('ilsan_services'));
+            const item = services.find(s => s.id === serviceId);
+            if (!item || !item.images || item.images.length === 0) return;
+            
+            currentModalServiceId = serviceId;
+            currentModalImgIndex = imgIndex;
+            
+            updateModalContent(item.images);
+            
             const modal = document.getElementById('imageModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function updateModalContent(imagesArray) {
             const modalImg = document.getElementById('modalTargetImg');
-            if(imgSrc && !imgSrc.includes('placehold.co')) {
-                modalImg.src = imgSrc;
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                document.body.style.overflow = 'hidden'; 
+            const counter = document.getElementById('modalImgCounter');
+            const currentUrl = imagesArray[currentModalImgIndex];
+            
+            modalImg.src = currentUrl;
+            counter.innerText = `${currentModalImgIndex + 1} / ${imagesArray.length}`;
+        }
+
+        function navigateModalImg(step) {
+            if (currentModalServiceId === null) return;
+            const services = JSON.parse(localStorage.getItem('ilsan_services'));
+            const item = services.find(s => s.id === currentModalServiceId);
+            if (!item || !item.images || item.images.length <= 1) return;
+            
+            const total = item.images.length;
+            currentModalImgIndex = (currentModalImgIndex + step + total) % total;
+            
+            // 바깥 메인 카드의 슬라이드 정보도 실시간 동기화
+            activeImageIndices[currentModalServiceId] = currentModalImgIndex;
+            
+            updateModalContent(item.images);
+            renderServices(); // 메인 화면 카운터도 함께 갱신
+        }
+
+        function handleKeyDown(e) {
+            const modal = document.getElementById('imageModal');
+            if (modal.classList.contains('hidden')) return;
+            
+            if (e.key === 'ArrowLeft') {
+                navigateModalImg(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateModalImg(1);
+            } else if (e.key === 'Escape') {
+                closeModal();
             }
         }
 
@@ -315,6 +362,7 @@ HTML
             modal.classList.remove('flex');
             modal.classList.add('hidden');
             document.body.style.overflow = ''; 
+            currentModalServiceId = null;
         }
 
         function openUrlModal(id) {
@@ -337,7 +385,6 @@ HTML
             document.body.style.overflow = '';
         }
 
-        /* ⭐ 쇠뿔도 단김에! 어떤 방식의 줄바꿈/구분자든 다 쪼개버리는 똑똑한 변환 엔진 */
         function saveUrlModalData() {
             const id = parseInt(document.getElementById('editingServiceId').value);
             const textValue = document.getElementById('urlTextArea').value;
@@ -345,9 +392,7 @@ HTML
             const services = JSON.parse(localStorage.getItem('ilsan_services'));
             const item = services.find(s => s.id === id);
             
-            // 📌 [핵심 개선] 윈도우 엔터(\r\n), 맥 엔터(\n), 콤마(,) 등 모든 구분자를 통합 처리합니다.
             let rawLines = textValue.replace(/\r\n/g, "\n").split(/[\n,]+/);
-            
             item.images = rawLines.map(line => line.trim()).filter(line => line.length > 0);
             activeImageIndices[id] = 0; 
             
